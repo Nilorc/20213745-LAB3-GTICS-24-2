@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lista de Empleados</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <div th:insert="navbar :: navbar"></div>
+
+        <div class="container">
+            <h2 class="my-4">Lista de Empleados</h2>
+
+            <form action="#" method="get" class="mb-3">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" name="filtroNombre" placeholder="Filtrar por nombre">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="filtroApellido" placeholder="Filtrar por apellido">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="filtroCargo" placeholder="Filtrar por cargo">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                        <a href="/empleados" class="btn btn-secondary">Limpiar</a>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cargo</th>
+                        <th>Departamento</th>
+                        <th>Teléfono</th>
+                        <th>Salario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="empleado, iterStat : ${empleados}">
+                        <td th:text="${iterStat.index + 1}"></td>
+                        <td th:text="${empleado.nombre}"></td>
+                        <td th:text="${empleado.apellido}"></td>
+                        <td th:text="${empleado.cargo}"></td>
+                        <td th:text="${empleado.departamento.nombre}"></td>
+                        <td th:text="${empleado.telefono}"></td>
+                        <td th:text="${empleado.salario}"></td>
+                        <td>
+                            <a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-warning">Editar</a>
+                            <a th:href="@{/empleados/eliminar/{id}(id=${empleado.id})}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+</html>

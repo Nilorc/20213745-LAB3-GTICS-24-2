@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Historial de Empleados</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div th:insert="navbar :: navbar"></div>
+
+        <div class="container">
+            <h2 class="my-4">Historial de Empleados</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre completo</th>
+                        <th>Departamento</th>
+                        <th>Puesto</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="historial : ${historial}">
+                        <td th:text="${historial.empleado.nombre + ' ' + historial.empleado.apellido}"></td>
+                        <td th:text="${historial.departamento.nombre}"></td>
+                        <td th:text="${historial.puesto}"></td>
+                        <td th:text="${#dates.format(historial.fechaInicio, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${#dates.format(historial.fechaFin, 'dd/MM/yyyy')}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+</html>
